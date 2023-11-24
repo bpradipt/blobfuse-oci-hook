@@ -81,7 +81,7 @@ func doWork(s spec.State, hookConfig internal.Config, debug bool) error {
 		return err
 	}
 
-	// Check if env variable CONTAINER_MOUNT_POINT is present in containerConfig.Process.Env by
+	// Check if env variable CONTAINER_MOUNTPOINT is present in containerConfig.Process.Env by
 	// calling internal.GetContainerMountPoint
 	// If it returns "", set dstMountPoint to the value from hookConfig.ContainerMountPoint
 	// If it returns a non empty string, set dstMountPoint to the return value

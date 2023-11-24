@@ -73,12 +73,12 @@ func BindMount(srcMountPoint string, dstMountPoint string) error {
 	return nil
 }
 
-// Get CONTAINER_MOUNT_POINT value from containerConfig.Process.Env
+// Get CONTAINER_MOUNTPOINT value from containerConfig.Process.Env
 
 func GetContainerMountPoint(env []string) string {
 
 	for _, envVar := range env {
-		if envVar == "CONTAINER_MOUNT_POINT" {
+		if envVar == "CONTAINER_MOUNTPOINT" {
 			// Split the envVar on "="
 			// The second part will be the value of CONTAINER_MOUNT_POINT
 			containerMountPoint := strings.Split(envVar, "=")[1]
