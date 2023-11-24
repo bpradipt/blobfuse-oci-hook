@@ -71,3 +71,28 @@ spec:
               key: AZURE_STORAGE_ACCOUNT_TYPE  
 
 ```
+
+## Build
+
+```
+GOOS=linux go build -o blobfuse_hook *.go
+```
+
+## Test
+
+```
+GOOS=linux go go test ./...
+```
+
+## Static checks
+
+
+```
+go install github.com/securego/gosec/v2/cmd/gosec@latest
+gosec ./...
+```
+
+```
+go install honnef.co/go/tools/cmd/staticcheck@latest
+staticcheck --tests=false ./...
+```
