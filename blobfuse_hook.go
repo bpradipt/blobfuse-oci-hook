@@ -60,7 +60,7 @@ func doWork(s spec.State, hookConfig internal.Config, debug bool) error {
 
 	rootfsPath := filepath.Join(bundlePath, "rootfs")
 
-	log.Printf("rootfsPath is %s\n", rootfsPath)
+	log.Infof("rootfsPath is %s\n", rootfsPath)
 
 	if debug {
 		log.Debugf("containerConfig contents: %v", containerConfig)
@@ -77,7 +77,7 @@ func doWork(s spec.State, hookConfig internal.Config, debug bool) error {
 	// Execute blobfuse
 	err = internal.ExecuteBlobFuseProcess(containerConfig.Process.Env, hookConfig)
 	if err != nil {
-		log.Printf("unable to execute blobfuse process %s\n", err)
+		log.Infof("unable to execute blobfuse process %s\n", err)
 		return err
 	}
 
@@ -94,7 +94,7 @@ func doWork(s spec.State, hookConfig internal.Config, debug bool) error {
 	// Prepend rootfsPath to containerMountPoint
 	dstMountPoint := filepath.Join(rootfsPath, containerMountPoint)
 
-	log.Printf("dstMountPoint is %s\n", dstMountPoint)
+	log.Infof("dstMountPoint is %s\n", dstMountPoint)
 
 	// Bind mount host mount point to container mount point
 	err = internal.BindMount(hookConfig.HostMountPoint, dstMountPoint)
@@ -104,7 +104,7 @@ func doWork(s spec.State, hookConfig internal.Config, debug bool) error {
 
 	// Write the config.json file
 	if err := internal.WriteOciConfigJson(configJsonPath, containerConfig); err != nil {
-		log.Printf("unable to write config.json %s\n", err)
+		log.Infof("unable to write config.json %s\n", err)
 		return err
 	}
 

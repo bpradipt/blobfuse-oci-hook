@@ -19,11 +19,11 @@ func ExecuteBlobFuseProcess(env []string, hookConfig Config) error {
 	// Create the host mount point directory path
 	err := os.MkdirAll(hookConfig.HostMountPoint, 0750)
 	if err != nil {
-		log.Printf("unable to create host mount point directory %s\n", err)
+		log.Infof("unable to create host mount point directory %s\n", err)
 		return err
 	}
 
-	log.Printf("Executing program %s\n", hookConfig.ProgramPath)
+	log.Infof("Executing program %s\n", hookConfig.ProgramPath)
 
 	// Build the arguments for the process
 	// The arguments will be the host mount point and other required
@@ -41,7 +41,7 @@ func ExecuteBlobFuseProcess(env []string, hookConfig Config) error {
 	// Run the command
 	err = cmd.Run()
 	if err != nil {
-		log.Printf("unable to execute process %s\n", err)
+		log.Infof("unable to execute process %s\n", err)
 		return err
 	}
 
@@ -53,20 +53,20 @@ func ExecuteBlobFuseProcess(env []string, hookConfig Config) error {
 
 func BindMount(srcMountPoint string, dstMountPoint string) error {
 
-	log.Printf("Bind mounting host mount point %s to container mount point %s\n",
+	log.Infof("Bind mounting host mount point %s to container mount point %s\n",
 		srcMountPoint, dstMountPoint)
 
 	// Create the dst mount point directory path
 	err := os.MkdirAll(dstMountPoint, 0750)
 	if err != nil {
-		log.Printf("create container mount point directory returned err: %s\n", err)
+		log.Infof("create container mount point directory returned err: %s\n", err)
 		return err
 	}
 
 	// Bind mount the host mount point to container mount point
 	err = sysmount.Mount(srcMountPoint, dstMountPoint, "none", "bind,rw")
 	if err != nil {
-		log.Printf("bind mount srcMountPoint (%s) dstMountPoint (%s) returned err: %s\n", srcMountPoint, dstMountPoint, err)
+		log.Infof("bind mount srcMountPoint (%s) dstMountPoint (%s) returned err: %s\n", srcMountPoint, dstMountPoint, err)
 		return err
 	}
 

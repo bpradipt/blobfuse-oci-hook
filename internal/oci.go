@@ -17,7 +17,7 @@ func ReadOciConfigJson(configJsonPath string) (specs.Spec, error) {
 	// Read the config.json file
 	ociConfigJsonData, err := os.ReadFile(configJsonPath)
 	if err != nil {
-		log.Printf("unable to read oci config.json %s\n", err)
+		log.Infof("unable to read oci config.json %s\n", err)
 		return containerConfig, err
 	}
 
@@ -25,7 +25,7 @@ func ReadOciConfigJson(configJsonPath string) (specs.Spec, error) {
 
 	err = json.Unmarshal(ociConfigJsonData, &containerConfig)
 	if err != nil {
-		log.Printf("unable to parse oci config.json %s\n", err)
+		log.Infof("unable to parse oci config.json %s\n", err)
 		return containerConfig, err
 	}
 	return containerConfig, nil
@@ -36,16 +36,16 @@ func WriteOciConfigJson(configJsonPath string, containerConfig specs.Spec) error
 	// Marshal the config.json file
 	ociConfigJsonData, err := json.Marshal(containerConfig)
 	if err != nil {
-		log.Printf("unable to marshal oci config.json %s\n", err)
+		log.Infof("unable to marshal oci config.json %s\n", err)
 		return err
 	}
 
 	// Write the config.json file
 	err = os.WriteFile(configJsonPath, ociConfigJsonData, 0600)
 	if err != nil {
-		log.Printf("unable to write oci config.json %s\n", err)
+		log.Infof("unable to write oci config.json %s\n", err)
 		return err
 	}
-	log.Printf("oci config.json written to %s\n", configJsonPath)
+	log.Infof("oci config.json written to %s\n", configJsonPath)
 	return nil
 }

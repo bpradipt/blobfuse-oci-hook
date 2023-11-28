@@ -48,13 +48,13 @@ func ReadConfig(configFile string) (Config, error) {
 	// Read the configuration file
 	jsonData, err := os.ReadFile(configFile)
 	if err != nil {
-		log.Printf("unable to read configuration file %s\n", err)
+		log.Infof("unable to read configuration file %s\n", err)
 		return config, err
 	}
 	// Unmarshal the configuration
 	err = json.Unmarshal(jsonData, &config)
 	if err != nil {
-		log.Printf("unable to unmarshal configuration file %s\n", err)
+		log.Infof("unable to unmarshal configuration file %s\n", err)
 		return config, err
 	}
 
@@ -69,12 +69,12 @@ func SetLogger(logger *logrus.Logger) {
 
 // Method to check if ActivationFlag is present in a slice of strings
 func IsActivationFlagPresent(env []string, activationFlag string) bool {
-	log.Printf("Searching for activation flag %s\n", activationFlag)
+	log.Infof("Searching for activation flag %s\n", activationFlag)
 	for _, val := range env {
 		// env strings are of the form key=value
 		// Match key with activationFlag
 		if strings.Contains(val, activationFlag) {
-			log.Printf("Activation flag %s is present\n", activationFlag)
+			log.Infof("Activation flag %s is present\n", activationFlag)
 			return true
 		}
 	}
